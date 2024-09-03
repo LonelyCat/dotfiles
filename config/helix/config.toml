@@ -1,0 +1,27 @@
+
+theme = "emacs"
+
+[editor]
+true-color = true
+auto-save = true
+cursorline = true
+mouse = true
+auto-format = true
+
+[editor.file-picker]
+hidden = false
+parents = false
+git-ignore = false
+
+[editor.lsp]
+auto-signature-help = false
+display-messages = true
+
+[keys.normal]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+D = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
+G = "goto_last_line"
+Z = { Z = ":write-quit" }
+C-q = ":quit"
+C-s = ":w"
