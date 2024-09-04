@@ -7,10 +7,11 @@
 
 # Autoloads
 #
+
 [ -d ~/.zfunc ] && fpath+=~/.zfunc
-autoload -U colors && colors
-autoload -U compinit && compinit
-autoload -U promptinit && promptinit
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+autoload -Uz promptinit && promptinit
 
 # Common environment
 #
@@ -63,8 +64,36 @@ bindkey "^[[F" end-of-line
 #[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   beginning-of-buffer-or-history
 #[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" end-of-buffer-or-history
 
+# Prompts
+#
+#
+if [ $(id -u) -eq 0 ]; then
+  rgb_usr="%{$fg[red]%}"
+else
+  rgb_usr="%{$fg[green]%}"
+fi
+PROMPT="$rgb_usr%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%# "
+RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
+
 # Advanced features
+#
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 source $SHARE/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $SHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+compinit
+
+# FZF integration
+#
+if type fzf &>/dev/null; then
+  FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
+  FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  FZF_DEFAULT_OPTS="--ansi"
+
+  source <(fzf --zsh)
+fi
 
 # $Id$

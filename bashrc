@@ -27,7 +27,7 @@ shopt -s hostcomplete
 shopt -s expand_aliases
 shopt -s interactive_comments
 
-export HISTTIMEFORMAT="%d/%m/%y %T "
+HISTTIMEFORMAT="%d/%m/%y %T "
 
 # Key bindings
 #
@@ -36,12 +36,32 @@ bind 'set show-all-if-ambiguous on'
 
 # Completions
 #
-if [ -f "$BREW/etc/bash_completion" ]; then
-    . $BREW/etc/bash_completion
+if [ ! -z "$BREW" ]
+then
+  if [ -r "$BREW/etc/profile.d/bash_completion.sh" ]
+  then
+    source "/opt/homebrew/etc/profile.d/bash_completion.sh"
+  else
+    if [[ -d "${BREW}/etc/bash_completion.d" ]]
+    then
+      for COMPLETION in "${BREW}/etc/bash_completion.d/"*
+      do
+        [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+      done
+    fi
+  fi
+
+  if [[ -d "${BREW}/share/bash_completion" ]]
+  then
+    for COMPLETION in "${BREW}/sahre/bash_completion/"*
+    do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
 fi
 
 if [ -f "$SHARE/bash_completion/bash_completion.sh" ]; then
-    . $SHARE/bash_completion/bash_completion
+  . $SHARE/bash_completion/bash_completion
 fi
 
 complete -A setopt set
@@ -61,5 +81,25 @@ complete -A file -A directory -A user chown
 complete -A file -A directory -A group chgrp
 complete -o default -W 'Makefile' -P '-o ' qmake
 complete -A command man which whatis sudo info apropos
+
+# Prompts
+#
+if [ $(id -u) -eq 0 ]; then
+  rgb_usr="${rgb_red}"
+else
+  rgb_usr="${rgb_green}"
+fi
+PS1="${rgb_usr}$(whoami)${rgb_std}@$(hostname -s) \w ${rgb_usr}\\\$${rgb_restore} "
+
+# FZF integration
+#
+if type fzf &>/dev/null; then
+  FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
+  FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  FZF_DEFAULT_OPTS="--ansi"
+
+  source <(fzf --bash)
+fi
 
 # $Id$

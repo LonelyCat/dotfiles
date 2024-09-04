@@ -17,25 +17,31 @@ PATH=/usr/bin:/usr/sbin:/bin:/sbin
 # OS specific
 #
 case $OSTYPE in
-darwin*)
+  darwin*)
     BREW=/opt/homebrew
     PATH=$BREW/bin:$BREW/sbin:$PATH
     HOMEBREW_TEMP=/tmp/hb
     SHARE=$BREW/share
     FD=fd
     ;;
-linux*)
+  linux*)
     [ -d /snap ] && PATH=/snap/bin:$PATH
     [ -d /usr/local ] && PATH=/usr/local/bin:/usr/local/sbin:$PATH
     SHARE=/usr/share
     FD=fdfind
     ;;
-freebsd*) ;;
+  freebsd*)
+  ;;
 esac
 
 # Development tools
 #
+if [ ! -z "$BREW//opt/homebrew/opt/llvm" ]
+then
+  PATH=/opt/homebrew/opt/llvm/bin:$PATH
+fi
 [ -d /usr/local/go ] && PATH=/usr/local/go/bin:$PATH
+[ -d ~/go ] && PATH=~/go/bin:$PATH
 [ -d ~/.cargo ] && PATH=~/.cargo/bin:$PATH
 
 # User local overrides
@@ -51,9 +57,9 @@ FCEDIT="${EDITOR}"
 PAGER='less'
 LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
 
-# Prompt
+# Colors
 #
-# color_name='\[\033[ color_code m\]'
+# color_name='\[\033[color_code\]'
 rgb_restore='\[\033[00m\]'
 rgb_black='\[\033[00;30m\]'
 rgb_firebrick='\[\033[00;31m\]'
@@ -70,65 +76,7 @@ rgb_cadet='\[\033[00;36m\]'
 rgb_cyan='\[\033[01;36m\]'
 rgb_gray='\[\033[00;37m\]'
 rgb_white='\[\033[01;37m\]'
-rgb_std="${rgb_black}"
-
-if [ $(id -u) -eq 0 ]; then
-    case $(basename $SHELL) in
-    bash)
-        rgb_usr="${rgb_red}"
-        ;;
-    fish)
-        rgb_usr="${rgb_red}"
-        ;;
-    zsh)
-        rgb_usr="%{$fg[red]%}"
-        ;;
-    esac
-else
-    case $(basename $SHELL) in
-    bash)
-        rgb_usr="${rgb_forest}"
-        ;;
-    fish)
-        rgb_usr="${rgb_forest}"
-        ;;
-    zsh)
-        rgb_usr="%{$fg[green]%}"
-        ;;
-    esac
-fi
-
-case $(basename $SHELL) in
-bash)
-    PS1="${rgb_usr}$(whoami)${rgb_std}@$(hostname -s) \w ${rgb_usr}\\\$${rgb_restore} "
-    ;;
-fish)
-    PS1="${rgb_usr}$(whoami)${rgb_std}@$(hostname -s) \w ${rgb_usr}\\\$${rgb_restore} "
-    ;;
-zsh)
-    PROMPT="$rgb_usr%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg_no_bold[yellow]%}%1~ %{$reset_color%}%# "
-    RPROMPT="[%{$fg_no_bold[yellow]%}%?%{$reset_color%}]"
-    ;;
-esac
-
-unset rgb_restore \
-    rgb_black \
-    rgb_firebrick \
-    rgb_red \
-    rgb_forest \
-    rgb_green \
-    rgb_brown \
-    rgb_yellow \
-    rgb_navy \
-    rgb_blue \
-    rgb_purple \
-    rgb_magenta \
-    rgb_cadet \
-    rgb_cyan \
-    rgb_gray \
-    rgb_white \
-    rgb_std \
-    rgb_usr
+rgb_std="${rgb_gray}"
 
 # Aliases
 #
@@ -157,15 +105,8 @@ function e { ${EDITOR} $@; }
 function c { clear; }
 function h { history $@; }
 function hc { history -c; }
-function hcc {
-    hc
-    c
-}
-
-function cx {
-    hc
-    x
-}
+function hcc { hc; c; }
+function cx { hc; x; }
 
 function .. { cd ..; }
 
@@ -209,26 +150,5 @@ function shells { p /etc/shells; }
 
 function lfstab { p /etc/fstab; }
 function lxconf { p /etc/X11/XF86Config-4; }
-
-# FZF integration
-#
-if type fzf &>/dev/null; then
-    case $(basename $SHELL) in
-    bash)
-        source <(fzf --bash)
-        ;;
-    fish)
-        source <(fzf --fish)
-        ;;
-    zsh)
-        source <(fzf --zsh)
-        ;;
-    esac
-
-    FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
-    FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-    FZF_DEFAULT_OPTS="--ansi"
-fi
 
 # $Id$
