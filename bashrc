@@ -36,24 +36,24 @@ bind 'set show-all-if-ambiguous on'
 
 # Completions
 #
-if [ ! -z "$BREW" ]
+if [ ! -z "$HOMEBREW" ]
 then
-  if [ -r "$BREW/etc/profile.d/bash_completion.sh" ]
+  if [ -r "$HOMEBREW/etc/profile.d/bash_completion.sh" ]
   then
     source "/opt/homebrew/etc/profile.d/bash_completion.sh"
   else
-    if [[ -d "${BREW}/etc/bash_completion.d" ]]
+    if [[ -d "${HOMEBREW}/etc/bash_completion.d" ]]
     then
-      for COMPLETION in "${BREW}/etc/bash_completion.d/"*
+      for COMPLETION in "${HOMEBREW}/etc/bash_completion.d/"*
       do
         [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
       done
     fi
   fi
 
-  if [[ -d "${BREW}/share/bash_completion" ]]
+  if [[ -d "${HOMEBREW}/share/bash_completion" ]]
   then
-    for COMPLETION in "${BREW}/sahre/bash_completion/"*
+    for COMPLETION in "${HOMEBREW}/sahre/bash_completion/"*
     do
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
     done

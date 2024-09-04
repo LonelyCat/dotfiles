@@ -18,10 +18,15 @@ PATH=/usr/bin:/usr/sbin:/bin:/sbin
 #
 case $OSTYPE in
   darwin*)
-    BREW=/opt/homebrew
-    PATH=$BREW/bin:$BREW/sbin:$PATH
-    HOMEBREW_TEMP=/tmp/hb
-    SHARE=$BREW/share
+    if [ "$(arch)" = "arm64" ]
+    then
+      HOMEBREW=/opt/homebrew
+    else
+      HOMEBREW=/usr/local
+    fi
+    PATH=$HOMEBREW/bin:$HOMEBREW/sbin:$PATH
+    HOMEHOMEBREW_TEMP=/tmp/hb
+    SHARE=$HOMEBREW/share
     FD=fd
     ;;
   linux*)
@@ -36,7 +41,7 @@ esac
 
 # Development tools
 #
-if [ ! -z "$BREW//opt/homebrew/opt/llvm" ]
+if [ ! -z "$HOMEBREW/opt/homebrew/opt/llvm" ]
 then
   PATH=/opt/homebrew/opt/llvm/bin:$PATH
 fi
