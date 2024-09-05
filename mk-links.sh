@@ -11,4 +11,6 @@ ln -sf $HOME/.dotfiles/dprint.json $HOME/.dprint.json
 ln -sf $HOME/.dotfiles/tmux.conf $HOME/.tmux.conf
 ln -sf $HOME/.dotfiles/gitconfig $HOME/.gitconfig
 
-ln -sf $HOME/.dotfiles/config $HOME/.config
+ln -sf $HOME/.dotfiles/config/helix $HOME/.config/helix
+ln -sf $HOME/.dotfiles/config/mc $HOME/.config/mc
+ln -sf $HOME/.dotfiles/config/rustfmt $HOME/.config/rustfmt

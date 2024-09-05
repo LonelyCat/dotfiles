@@ -156,4 +156,14 @@ function shells { p /etc/shells; }
 function lfstab { p /etc/fstab; }
 function lxconf { p /etc/X11/XF86Config-4; }
 
+# FZF integration
+#
+if type fzf &>/dev/null
+then
+  FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
+  FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  FZF_DEFAULT_OPTS="--ansi"
+fi
+
 # $Id$

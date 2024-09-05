@@ -87,12 +87,8 @@ compinit
 
 # FZF integration
 #
-if type fzf &>/dev/null; then
-  FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
-  FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  FZF_DEFAULT_OPTS="--ansi"
-
+if type fzf &>/dev/null
+then
   source <(fzf --zsh)
 fi
 

@@ -93,12 +93,8 @@ PS1="${rgb_usr}$(whoami)${rgb_std}@$(hostname -s) \w ${rgb_usr}\\\$${rgb_restore
 
 # FZF integration
 #
-if type fzf &>/dev/null; then
-  FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
-  FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  FZF_DEFAULT_OPTS="--ansi"
-
+if type fzf &>/dev/null
+then
   source <(fzf --bash)
 fi
 
