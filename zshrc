@@ -66,7 +66,6 @@ bindkey "^[[F" end-of-line
 
 # Prompts
 #
-#
 if [ $(id -u) -eq 0 ]; then
   rgb_usr="%{$fg[red]%}"
 else
