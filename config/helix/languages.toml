@@ -62,7 +62,7 @@ command = "gopls"
 name = "zig"
 file-types = [ "zig", "zon" ]
 auto-format = true
-formatter = { command = "zig", args = [ "fmt" ] }
+formatter = { command = "zig", args = [ "fmt", "--stdin" ] }
 language-servers = [ "zls" ]
 
 [language-server.zls]
