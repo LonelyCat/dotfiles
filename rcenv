@@ -10,6 +10,17 @@
 umask 022
 ulimit -c 0
 
+# User environment
+#
+EDITOR='hx'
+USER_LOCAL=${HOME}/.local
+USER_BIN=${USER_LOCAL}/bin
+USER_SHARE=${USER_LOCAL}/share
+VISUAL="${EDITOR}"
+FCEDIT="${EDITOR}"
+PAGER='less'
+LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
+
 # PATH
 #
 PATH=/usr/bin:/usr/sbin:/bin:/sbin
@@ -39,28 +50,15 @@ case $OSTYPE in
   ;;
 esac
 
+PATH=$USER_BIN:$PATH
+
 # Development tools
 #
-if [ ! -z "$HOMEBREW/opt/homebrew/opt/llvm" ]
-then
-  PATH=/opt/homebrew/opt/llvm/bin:$PATH
-fi
-[ -d /usr/local/go ] && PATH=/usr/local/go/bin:$PATH
-[ -d ~/go ] && PATH=~/go/bin:$PATH
+[ -d "${HOMEBREW}/opt/llvm" ] && PATH=${HOMEBREW}/opt/llvm/bin:$PATH
 [ -d ~/.cargo ] && PATH=~/.cargo/bin:$PATH
+[ -d ~/go ] && PATH=~/go/bin:$PATH
+[ -d /usr/local/go ] && PATH=/usr/local/go/bin:$PATH
 
-# User local overrides
-#
-PATH=~/.local/bin:$PATH
-
-# User environment
-#
-AUTOSSH_PORT=49999
-EDITOR='hx'
-VISUAL="${EDITOR}"
-FCEDIT="${EDITOR}"
-PAGER='less'
-LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
 
 # Colors
 #

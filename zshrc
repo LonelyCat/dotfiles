@@ -82,7 +82,6 @@ then
 fi
 source $SHARE/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $SHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-compinit
 
 # FZF integration
 #
@@ -90,5 +89,7 @@ if type fzf &>/dev/null
 then
   source <(fzf --zsh)
 fi
+
+compinit
 
 # $Id$
