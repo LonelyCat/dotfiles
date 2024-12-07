@@ -23,7 +23,7 @@ LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;
 
 # PATH
 #
-PATH=/usr/bin:/usr/sbin:/bin:/sbin
+PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 # OS specific
 #
@@ -42,7 +42,6 @@ case $OSTYPE in
     ;;
   linux*)
     [ -d /snap ] && PATH=/snap/bin:$PATH
-    [ -d /usr/local ] && PATH=/usr/local/bin:/usr/local/sbin:$PATH
     SHARE=/usr/share
     FD=fdfind
     ;;
@@ -54,7 +53,8 @@ PATH=$USER_BIN:$PATH
 
 # Development tools
 #
-[ -d "${HOMEBREW}/opt/llvm" ] && PATH=${HOMEBREW}/opt/llvm/bin:$PATH
+[ -d ${HOMEBREW}/opt/openjdk ] && PATH=${HOMEBREW}/opt/openjdk/bin:$PATH
+[ -d ${HOMEBREW}/opt/llvm ] && PATH=${HOMEBREW}/opt/llvm/bin:$PATH
 [ -d ~/.cargo ] && PATH=~/.cargo/bin:$PATH
 [ -d ~/go ] && PATH=~/go/bin:$PATH
 [ -d /usr/local/go ] && PATH=/usr/local/go/bin:$PATH
@@ -83,13 +83,22 @@ rgb_std="${rgb_gray}"
 
 # Aliases
 #
+if type eza &>/dev/null
+then
+  alias ls=eza
+fi
 alias l='ls -F --color'
 alias l1='l -1'
 alias ll='l -l'
 alias la='l -la'
-alias m='less'
 alias g='grep'
 alias mc="mc -X --nosubshell"
+if type bat &>/dev/null
+then
+  alias m='bat'
+else
+  alias m='less'
+fi
 
 # Functions
 #

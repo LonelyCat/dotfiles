@@ -1,5 +1,10 @@
+[language-server.gpt]
+command = "helix-gpt"
+args = [ "--handler", "codeium", "--codeiumApiKey", "35ffec80-f036-464e-b1b0-4561faeae0dd" ]
+
 [[language]]
 name = "rust"
+file-types = [ "rs" ]
 auto-format = true
 formatter = { command = "rustfmt", args = ["--config", "struct_field_align_threshold=32,enum_discrim_align_threshold=32"] }
 
@@ -51,7 +56,10 @@ args = { console = "internalConsole", attachCommands = ["platform select remote-
 
 [[language]]
 name = "go"
+file-types = [ "go" ]
 auto-format = true
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
 formatter = { command = "gofmt", args = [] }
 language-servers = [ "gopls", "gpt" ]
 
@@ -81,11 +89,14 @@ args = { program = "{0}", console = "internalConsole", initCommands = [] }
 
 [[language]]
 name = "bash"
+file-types = [ "bash" ]
+comment-token = "# "
 formatter = { command = 'shfmt', args = ["-i", "4"] }
 auto-format = true
 
 [[language]]
 name = "json"
+file-types = [ "json" ]
 auto-format = true
 formatter = { command = "dprint", args = [ "fmt", "--stdin", "json" ] }
 language-servers = ["vscode-json-language-server"]
@@ -95,13 +106,24 @@ command = "vscode-json-language-server"
 
 [[language]]
 name = "yaml"
+file-types = [ "yml", "yaml" ]
 auto-format = true
+comment-token = "# "
 formatter = { command = "dprint", args = [ "fmt", "--stdin", "json" ] }
 language-servers = ["yaml-language-server"]
 
 [language-server.yaml-language-server]
 command = "yaml-language-server"
 
-[language-server.gpt]
-command = "helix-gpt"
-args = [ "--handler", "codeium", "--codeiumApiKey", "35ffec80-f036-464e-b1b0-4561faeae0dd" ]
+[[language]]
+name = "pkl"
+file-types = [ "pkl" ]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["pkl-lsp"]
+
+[language-server.pkl-lsp]
+command = "pkl"
+args = [ "server" ]
+# command = "java"
+# args = [ "-jar", "/Users/alex/.local/bin/pkl-lsp-0.1.2.jar" ]

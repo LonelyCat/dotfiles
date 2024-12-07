@@ -5,17 +5,20 @@
 # ZSH startup
 #
 
-# Autoloads
-#
-
-[ -d ~/.zfunc ] && fpath+=~/.zfunc
-autoload -Uz colors && colors
-autoload -Uz compinit && compinit
-autoload -Uz promptinit && promptinit
-
 # Common environment
 #
 . $HOME/.rcenv
+
+# Completeions
+#
+[ -d "$HOMEBREW" ] && fpath+=$HOMEBREW/completions/zsh
+[ -d ~/.zfunc ] && fpath+=~/.zfunc
+
+# Autoloads
+#
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+autoload -Uz promptinit && promptinit
 
 # History settings
 #
