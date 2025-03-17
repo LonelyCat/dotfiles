@@ -1,7 +1,3 @@
-[language-server.gpt]
-command = "helix-gpt"
-args = [ "--handler", "codeium", "--codeiumApiKey", "35ffec80-f036-464e-b1b0-4561faeae0dd" ]
-
 [[language]]
 name = "rust"
 file-types = [ "rs" ]
@@ -61,7 +57,7 @@ auto-format = true
 comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 formatter = { command = "gofmt", args = [] }
-language-servers = [ "gopls", "gpt" ]
+language-servers = [ "gopls" ]
 
 [language-server.gopls]
 command = "gopls"
@@ -103,6 +99,7 @@ language-servers = ["vscode-json-language-server"]
 
 [language-server.vscode-json-language-server]
 command = "vscode-json-language-server"
+args = [ ]
 
 [[language]]
 name = "yaml"
@@ -114,6 +111,7 @@ language-servers = ["yaml-language-server"]
 
 [language-server.yaml-language-server]
 command = "yaml-language-server"
+args = [ ]
 
 [[language]]
 name = "pkl"
@@ -123,7 +121,15 @@ indent = { tab-width = 2, unit = "  " }
 language-servers = ["pkl-lsp"]
 
 [language-server.pkl-lsp]
-command = "pkl"
-args = [ "server" ]
-# command = "java"
-# args = [ "-jar", "/Users/alex/.local/bin/pkl-lsp-0.1.2.jar" ]
+command = "java"
+args = [ "-jar", "/Users/alex/.local/bin/pkl-lsp.jar" ]
+
+[[language]]
+name = "lua"
+file-types = [ "lua" ]
+auto-format = true
+language-servers = ["lua-lsp"]
+
+[language-server.lua-lsp]
+command = "lua-language-server"
+args = [ ]

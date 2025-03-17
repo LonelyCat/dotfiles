@@ -1,5 +1,5 @@
 
-theme = "emacs"
+theme = "dark_high_contrast"
 
 [editor]
 true-color = true
@@ -14,7 +14,7 @@ parents = false
 git-ignore = false
 
 [editor.lsp]
-auto-signature-help = false
+auto-signature-help = true
 display-messages = true
 
 [keys.normal]

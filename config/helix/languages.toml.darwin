@@ -1,0 +1,135 @@
+[[language]]
+name = "rust"
+file-types = [ "rs" ]
+auto-format = true
+formatter = { command = "rustfmt", args = ["--config", "struct_field_align_threshold=32,enum_discrim_align_threshold=32"] }
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+inlayHints.bindingModeHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "with_block"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
+
+[language.debugger]
+name = "lldb"
+command = "lldb-dap"
+transport = "stdio"
+
+[[language.debugger.templates]]
+name = "binary"
+request = "launch"
+completion = [{ name = "binary", completion = "filename" }]
+args = { program = "{0}", console = "internalConsole", initCommands = ["command script import /Users/alex/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/etc/lldb_lookup.py", "command source -s 0 /Users/alex/.rustup/toolchains/stable-aarch64-apple-darwin/lib/rustlib/etc/lldb_commands"] }
+
+[[language.debugger.templates]]
+name = "attach"
+request = "attach"
+completion = ["pid"]
+args = { console = "internalConsole", pid = "{0}" }
+
+[[language.debugger.templates]]
+name = "gdbserver attach"
+request = "attach"
+completion = [
+  { name = "lldb connect url", default = "connect://localhost:3333" },
+  { name = "file", completion = "filename" },
+  "pid",
+]
+args = { console = "internalConsole", attachCommands = ["platform select remote-gdb-server", "platform connect {0}", "file {1}", "attach {2}"] }
+
+[[language]]
+name = "go"
+file-types = [ "go" ]
+auto-format = true
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+formatter = { command = "gofmt", args = [] }
+language-servers = [ "gopls" ]
+
+[language-server.gopls]
+command = "gopls"
+
+[[language]]
+name = "zig"
+file-types = [ "zig", "zon" ]
+auto-format = true
+formatter = { command = "zig", args = [ "fmt", "--stdin" ] }
+language-servers = [ "zls" ]
+
+[language-server.zls]
+command = "zls"
+
+[language.debugger]
+name = "lldb"
+command = "lldb-dap"
+transport = "stdio"
+
+[[language.debugger.templates]]
+name = "binary"
+request = "launch"
+completion = [{ name = "binary", completion = "filename" }]
+args = { program = "{0}", console = "internalConsole", initCommands = [] }
+
+[[language]]
+name = "bash"
+file-types = [ "bash" ]
+comment-token = "# "
+formatter = { command = 'shfmt', args = ["-i", "4"] }
+auto-format = true
+
+[[language]]
+name = "json"
+file-types = [ "json" ]
+auto-format = true
+formatter = { command = "dprint", args = [ "fmt", "--stdin", "json" ] }
+language-servers = ["vscode-json-language-server"]
+
+[language-server.vscode-json-language-server]
+command = "vscode-json-language-server"
+args = [ ]
+
+[[language]]
+name = "yaml"
+file-types = [ "yml", "yaml" ]
+auto-format = true
+comment-token = "# "
+formatter = { command = "dprint", args = [ "fmt", "--stdin", "json" ] }
+language-servers = ["yaml-language-server"]
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = [ ]
+
+[[language]]
+name = "pkl"
+file-types = [ "pkl" ]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["pkl-lsp"]
+
+[language-server.pkl-lsp]
+command = "pkl-lsp"
+args = [ ]
+
+[[language]]
+name = "lua"
+file-types = [ "lua" ]
+auto-format = true
+language-servers = ["lua-lsp"]
+
+[language-server.lua-lsp]
+command = "lua-language-server"
+args = [ ]

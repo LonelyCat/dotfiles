@@ -1,14 +1,14 @@
-#
-# $Version$
-# $Revision$
-#
-# BASH startup
-#
+##
+## $Version$
+## $Revision$
+##
+## BASH startup
+##
 
 . $HOME/.rcenv
 
-# Options
-#
+## Options
+##
 set -o noclobber
 set -o physical
 
@@ -29,13 +29,13 @@ shopt -s interactive_comments
 
 HISTTIMEFORMAT="%d/%m/%y %T "
 
-# Key bindings
-#
+## Key bindings
+##
 bind 'TAB:menu-complete'
 bind 'set show-all-if-ambiguous on'
 
-# Completions
-#
+## Completions
+##
 if [ ! -z "$HOMEBREW" ]
 then
   if [ -r "$HOMEBREW/etc/profile.d/bash_completion.sh" ]
@@ -82,8 +82,8 @@ complete -A file -A directory -A group chgrp
 complete -o default -W 'Makefile' -P '-o ' qmake
 complete -A command man which whatis sudo info apropos
 
-# Prompts
-#
+## Prompts
+##
 if [ $(id -u) -eq 0 ]; then
   rgb_usr="${rgb_red}"
 else
@@ -91,11 +91,11 @@ else
 fi
 PS1="${rgb_usr}$(whoami)${rgb_std}@$(hostname -s) \w ${rgb_usr}\\\$${rgb_restore} "
 
-# FZF integration
-#
+## FZF integration
+##
 if type fzf &>/dev/null
 then
   source <(fzf --bash)
 fi
 
-# $Id$
+## $Id$

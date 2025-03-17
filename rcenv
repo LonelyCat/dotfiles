@@ -1,18 +1,18 @@
-#
-# $Version$
-# $Revision$
-#
-# Common environment & settings
-#
+##
+## $Version$
+## $Revision$
+##
+## Common environment & settings
+##
 
-# User settings
-#
+## User settings
+##
 umask 022
 ulimit -c 0
 
-# User environment
-#
-EDITOR='hx'
+## User environment
+##
+EDITOR='vim'
 USER_LOCAL=${HOME}/.local
 USER_BIN=${USER_LOCAL}/bin
 USER_SHARE=${USER_LOCAL}/share
@@ -21,12 +21,12 @@ FCEDIT="${EDITOR}"
 PAGER='less'
 LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
 
-# PATH
-#
+## PATH
+##
 PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
-# OS specific
-#
+## OS specific
+##
 case $OSTYPE in
   darwin*)
     if [ "$(arch)" = "arm64" ]
@@ -51,8 +51,8 @@ esac
 
 PATH=$USER_BIN:$PATH
 
-# Development tools
-#
+## Development tools
+##
 [ -d ${HOMEBREW}/opt/openjdk ] && PATH=${HOMEBREW}/opt/openjdk/bin:$PATH
 [ -d ${HOMEBREW}/opt/llvm ] && PATH=${HOMEBREW}/opt/llvm/bin:$PATH
 [ -d ~/.cargo ] && PATH=~/.cargo/bin:$PATH
@@ -60,9 +60,9 @@ PATH=$USER_BIN:$PATH
 [ -d /usr/local/go ] && PATH=/usr/local/go/bin:$PATH
 
 
-# Colors
-#
-# color_name='\[\033[color_code\]'
+## Colors
+##
+## color_name='\[\033[color_code\]'
 rgb_restore='\[\033[00m\]'
 rgb_black='\[\033[00;30m\]'
 rgb_firebrick='\[\033[00;31m\]'
@@ -81,8 +81,8 @@ rgb_gray='\[\033[00;37m\]'
 rgb_white='\[\033[01;37m\]'
 rgb_std="${rgb_gray}"
 
-# Aliases
-#
+## Aliases
+##
 if type eza &>/dev/null
 then
   alias ls=eza
@@ -97,11 +97,16 @@ if type bat &>/dev/null
 then
   alias m='bat'
 else
-  alias m='less'
+  if type batcat &>/dev/null
+  then
+    alias m='batcat'
+  else
+    alias m='less'
+  fi
 fi
 
-# Functions
-#
+## Functions
+##
 function rmd { rm -fr $@; }
 
 function x { exit $@; }
@@ -163,8 +168,8 @@ function shells { p /etc/shells; }
 function lfstab { p /etc/fstab; }
 function lxconf { p /etc/X11/XF86Config-4; }
 
-# FZF integration
-#
+## FZF integration
+##
 if type fzf &>/dev/null
 then
   FZF_DEFAULT_COMMAND="$FD --type f --hidden --follow --color=always -E .git --ignore-file ~/.gitignore"
@@ -173,4 +178,4 @@ then
   FZF_DEFAULT_OPTS="--ansi"
 fi
 
-# $Id$
+## $Id$
