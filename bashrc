@@ -91,11 +91,15 @@ else
 fi
 PS1="${rgb_usr}$(whoami)${rgb_std}@$(hostname -s) \w ${rgb_usr}\\\$${rgb_restore} "
 
-## FZF integration
+## Tools integration
 ##
 if type fzf &>/dev/null
 then
   source <(fzf --bash)
+fi
+if type jj &>/dev/null
+then
+  source <(jj util completion bash)
 fi
 
 ## $Id$
