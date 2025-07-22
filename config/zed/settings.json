@@ -8,11 +8,31 @@
 // from the command palette or from `Zed` application menu.
 
 {
-  "theme": "One Light",
+  "edit_predictions": {
+    "disabled_globs": [],
+    "mode": "eager",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null,
+      "enterprise_uri": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "ssh_connections": [
+    {
+      "host": "neon",
+      "projects": [
+        {
+          "paths": ["/home/alex/src/go/tgdp"]
+        }
+      ]
+    }
+  ],
+  "theme": "VSCode Dark Modern",
   "hour_format": "hour24",
   "ui_font_size": 15,
   "buffer_font_size": 15.0,
-  "buffer_font_family": "Fira Code",
+  "buffer_font_family": "Zed Plex Mono",
   "buffer_line_height": "standard",
 
   "telemetry": {
@@ -26,17 +46,19 @@
     "**/.git*",
     "**/.vscode",
     "**/.zig-cache",
+    "**/__debug*",
     "**/target",
+    "**/vendor",
     "**/zig-out"
   ],
 
   "autosave": {
     "after_delay": {
-      "milliseconds": 1000
+      "milliseconds": 500
     }
   },
 
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-latest"
@@ -91,11 +113,16 @@
     }
   },
 
+  "file_types": {
+    "Go": ["go"],
+    "Lua": ["Lua"],
+    "Pkl": ["pkl"],
+    "Rust": ["rs"],
+    "Zig": ["zig", "ZON"]
+  },
+
   "languages": {
     "Rust": {
-      "file_types": {
-        "Rust": ["rs"]
-      },
       "tab_size": 4,
       "show_edit_predictions": true,
       "enable_language_server": true,
@@ -113,10 +140,6 @@
     },
 
     "Zig": {
-      "file_types": {
-        "Zig": ["zig"],
-        "ZON": ["zon"]
-      },
       "tab_size": 4,
       "show_edit_predictions": true,
       "enable_language_server": true,
@@ -131,9 +154,6 @@
     },
 
     "Go": {
-      "file_types": {
-        "Go": ["go"]
-      },
       "tab_size": 4,
       "show_edit_predictions": true,
       "enable_language_server": true,
@@ -148,9 +168,6 @@
     },
 
     "Lua": {
-      "file_types": {
-        "Lua": ["Lua"]
-      },
       "tab_size": 4,
       "show_edit_predictions": true,
       "enable_language_server": true,
@@ -159,9 +176,6 @@
     },
 
     "Pkl": {
-      "file_types": {
-        "Pkl": ["pkl"]
-      },
       "tab_size": 2,
       "show_edit_predictions": true,
       "enable_language_server": true,

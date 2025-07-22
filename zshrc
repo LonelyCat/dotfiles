@@ -85,12 +85,17 @@ then
 fi
 source $SHARE/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $SHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-## FZF integration
+## Tools integration
 ##
 if type fzf &>/dev/null
 then
   source <(fzf --zsh)
+fi
+if type jj &>/dev/null
+then
+  source <(jj util completion zsh)
 fi
 
 compinit
