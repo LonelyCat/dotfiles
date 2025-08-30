@@ -85,7 +85,10 @@ then
 fi
 source $SHARE/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $SHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+if [ -n "$BREW" ]
+then
+  source $SHARE/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+fi
 
 ## Tools integration
 ##
