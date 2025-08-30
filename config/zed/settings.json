@@ -8,176 +8,170 @@
 // from the command palette or from `Zed` application menu.
 
 {
-  "edit_predictions": {
-    "disabled_globs": [],
-    "mode": "eager",
-    "copilot": {
-      "proxy": null,
-      "proxy_no_verify": null,
-      "enterprise_uri": null
+    "edit_predictions": {
+        "disabled_globs": [],
+        "mode": "eager",
+        "copilot": {
+            "proxy": null,
+            "proxy_no_verify": null,
+            "enterprise_uri": null
+        },
+        "enabled_in_text_threads": false
     },
-    "enabled_in_text_threads": false
-  },
-  "ssh_connections": [
-    {
-      "host": "neon",
-      "projects": [
+    "ssh_connections": [
         {
-          "paths": ["/home/alex/src/go/tgdp"]
         }
-      ]
-    }
-  ],
-  "theme": "VSCode Dark Modern",
-  "ui_font_size": 15,
-  "buffer_font_size": 15.0,
-  "buffer_font_family": ".ZedMono",
-  "buffer_line_height": "standard",
+    ],
+    "theme": "VSCode Dark Modern",
+    "ui_font_size": 15,
+    "buffer_font_size": 15.0,
+    "buffer_font_family": ".ZedMono",
+    "buffer_line_height": "standard",
 
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
 
-  "file_scan_exclusions": [
-    "**/.DS_Store",
-    "**/.localized",
-    "**/.git*",
-    "**/.vscode",
-    "**/.zig-cache",
-    "**/__debug*",
-    "**/target",
-    "**/vendor",
-    "**/zig-out"
-  ],
+    "file_scan_exclusions": [
+        "**/.DS_Store",
+        "**/.localized",
+        "**/.git*",
+        "**/.vscode",
+        "**/.zig-cache",
+        "**/__debug*",
+        "**/target",
+        "**/vendor",
+        "**/zig-out"
+    ],
 
-  "autosave": {
-    "after_delay": {
-      "milliseconds": 500
-    }
-  },
-
-  "agent": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
-    }
-  },
-
-  "features": {
-    "edit_prediction_provider": "zed"
-  },
-
-  "lsp": {
-    "rust-analyzer": {
-      "binary": {
-        "path": "rust-analyzer",
-        "arguments": ["--no-log-buffering"]
-      },
-      "initialization_options": {
-        "checkOnSave": {
-          "command": "clippy"
+    "autosave": {
+        "after_delay": {
+            "milliseconds": 500
         }
-      }
     },
 
-    "zls": {
-      "binary": {
-        "path": "zls",
-        "arguments": []
-      }
+    "agent": {
+        "default_model": {
+            "provider": "google",
+            "model": "gemini-2.5-pro"
+        }
     },
 
-    "gopls": {
-      "binary": {
-        "path": "gopls",
-        "arguments": []
-      }
+    "features": {
+        "edit_prediction_provider": "zed"
     },
 
-    "lua-lsp": {
-      "binary": {
-        "path": "emmylua_ls",
-        "arguments": []
-      }
+    "lsp": {
+        "rust-analyzer": {
+            "binary": {
+                "path": "rust-analyzer",
+                "arguments": ["--no-log-buffering"]
+            },
+            "initialization_options": {
+                "checkOnSave": {
+                    "command": "clippy"
+                }
+            }
+        },
+
+        "zls": {
+            "binary": {
+                "path": "zls",
+                "arguments": []
+            }
+        },
+
+        "gopls": {
+            "binary": {
+                "path": "gopls",
+                "arguments": []
+            }
+        },
+
+        "lua-lsp": {
+            "binary": {
+                "path": "emmylua_ls",
+                "arguments": []
+            }
+        },
+
+        "pkl-lsp": {
+            "binary": {
+                "path": "pkl-lsp",
+                "arguments": []
+            }
+        }
     },
 
-    "pkl-lsp": {
-      "binary": {
-        "path": "pkl-lsp",
-        "arguments": []
-      }
+    "file_types": {
+        "Go": ["go"],
+        "Lua": ["Lua"],
+        "Pkl": ["pkl"],
+        "Rust": ["rs"],
+        "Zig": ["zig", "ZON"]
+    },
+
+    "languages": {
+        "Rust": {
+            "tab_size": 4,
+            "show_edit_predictions": true,
+            "enable_language_server": true,
+            "language_servers": ["rust-analyzer"],
+            "format_on_save": "on",
+            "formatter": {
+                "external": {
+                    "command": "rustfmt",
+                    "arguments": [
+                        "--config",
+                        "struct_field_align_threshold=32,enum_discrim_align_threshold=32"
+                    ]
+                }
+            }
+        },
+
+        "Zig": {
+            "tab_size": 4,
+            "show_edit_predictions": true,
+            "enable_language_server": true,
+            "language_servers": ["zls"],
+            "format_on_save": "on",
+            "formatter": {
+                "external": {
+                    "command": "zig",
+                    "arguments": ["fmt", "--stdin"]
+                }
+            }
+        },
+
+        "Go": {
+            "tab_size": 4,
+            "show_edit_predictions": true,
+            "enable_language_server": true,
+            "language_servers": ["gopls"],
+            "format_on_save": "on",
+            "formatter": {
+                "external": {
+                    "command": "gofmt",
+                    "arguments": []
+                }
+            }
+        },
+
+        "Lua": {
+            "tab_size": 4,
+            "show_edit_predictions": true,
+            "enable_language_server": true,
+            "language_servers": ["lua-pls"],
+            "format_on_save": "on"
+        },
+
+        "Pkl": {
+            "tab_size": 2,
+            "show_edit_predictions": true,
+            "enable_language_server": true,
+            "language_servers": ["pkl-lsp"],
+            "format_on_save": "on"
+        }
     }
-  },
-
-  "file_types": {
-    "Go": ["go"],
-    "Lua": ["Lua"],
-    "Pkl": ["pkl"],
-    "Rust": ["rs"],
-    "Zig": ["zig", "ZON"]
-  },
-
-  "languages": {
-    "Rust": {
-      "tab_size": 4,
-      "show_edit_predictions": true,
-      "enable_language_server": true,
-      "language_servers": ["rust-analyzer"],
-      "format_on_save": "on",
-      "formatter": {
-        "external": {
-          "command": "rustfmt",
-          "arguments": [
-            "--config",
-            "struct_field_align_threshold=32,enum_discrim_align_threshold=32"
-          ]
-        }
-      }
-    },
-
-    "Zig": {
-      "tab_size": 4,
-      "show_edit_predictions": true,
-      "enable_language_server": true,
-      "language_servers": ["zls"],
-      "format_on_save": "on",
-      "formatter": {
-        "external": {
-          "command": "zig",
-          "arguments": ["fmt", "--stdin"]
-        }
-      }
-    },
-
-    "Go": {
-      "tab_size": 4,
-      "show_edit_predictions": true,
-      "enable_language_server": true,
-      "language_servers": ["gopls"],
-      "format_on_save": "on",
-      "formatter": {
-        "external": {
-          "command": "gofmt",
-          "arguments": []
-        }
-      }
-    },
-
-    "Lua": {
-      "tab_size": 4,
-      "show_edit_predictions": true,
-      "enable_language_server": true,
-      "language_servers": ["lua-pls"],
-      "format_on_save": "on"
-    },
-
-    "Pkl": {
-      "tab_size": 2,
-      "show_edit_predictions": true,
-      "enable_language_server": true,
-      "language_servers": ["pkl-lsp"],
-      "format_on_save": "language_server"
-    }
-  }
 }
