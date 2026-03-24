@@ -45,6 +45,11 @@ function _alias() {
   fi
 }
 
+## Default environment
+##
+PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+SHARE=/usr/share
+
 ## User settings
 ##
 umask 022
@@ -60,10 +65,6 @@ VISUAL="${EDITOR}"
 FCEDIT="${EDITOR}"
 PAGER='less'
 LS_COLORS='no=01;37:fi=01;37:di=01;34:ln=01;36:pi=01;32:so=01;35:do=01;35:bd=01;33:cd=01;33:ex=01;31:mi=00;05;37:or=00;05;37:'
-
-## PATH
-##
-PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 ## OS specific
 ##
@@ -83,17 +84,23 @@ else
       else
         HOMEBREW=/usr/local
       fi
-      PATH=$HOMEBREW/bin:$HOMEBREW/sbin:$PATH
       HOMEHOMEBREW_TEMP=/tmp/hb
-      SHARE=$HOMEBREW/share
       ;;
     linux*)
+      HOMEBREW=/home/linuxbrew/.linuxbrew
       [ -d /snap ] && PATH=/snap/bin:$PATH
-      SHARE=/usr/share
       ;;
     freebsd*)
     ;;
   esac
+
+  if [ -d "$HOMEBREW" ]
+  then
+    PATH=$HOMEBREW/bin:$HOMEBREW/sbin:$PATH
+    SHARE=$HOMEBREW/share
+  else
+    echo "Homebrew not found ):"
+  fi
 fi
 
 ## Colors
