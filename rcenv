@@ -229,4 +229,12 @@ FZF_COMPLETION_OPTS='(default: empty)'
 ##
 PATH=$USER_BIN:$PATH
 
+## Machine specific environment
+##
+RCENV_LOCAL="$HOME/.rcenv.local"
+if [ -f $RCENV_LOCAL ]
+then
+  source $RCENV_LOCAL
+fi
+
 ## $Id$

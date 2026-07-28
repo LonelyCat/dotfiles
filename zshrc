@@ -92,4 +92,13 @@ _completions golangci-lint completion
 _completions pkl shell-completion
 _completions rustup completions
 
+## Compeletion from DNS & SSH
+##
+SSH_HOSTS=$(egrep -i 'Host\s+' ~/.ssh/config* 2>/dev/null | awk '{print $2}')
+if [ ! -z "$DNS_SERVER" ] && [ ! -z "$DNS_ZONES" ]
+then
+  DNS_HOSTS=$(echo $DNS_ZONES | dig @$DNS_SERVER axfr -f - | awk '/IN[ \t]+A/ {print $1}' | sed 's/\.$//')
+fi
+zstyle -e ':completion:*' hosts "reply=( $DNS_HOSTS $SSH_HOSTS )"
+
 ## $Id$
